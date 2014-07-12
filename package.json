@@ -1,0 +1,23 @@
+{
+  "name": "alphatab",
+  "version": "0.1.0",
+  "description": "a cross platform music notation and guitar tablature rendering library",
+  "main": "index.js",
+  "repository": "git://github.com/spud/alphatab.git",
+  "keywords": [
+    "guitar",
+    "tab",
+    "alphatab",
+    "music",
+    "multi-media"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "supersheep",
+    "email": "supersheepxjy@gmail.com"
+  },
+  "bugs": {
+    "url": "http://github.com/spud/alphatab/issues"
+  },
+  "homepage": "http://github.com/spud/alphatab"
+}
