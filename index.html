@@ -14,14 +14,108 @@
 </head>
 
 <body>
+
+<style>
+#filelist{
+  float: right;
+  line-height: 1.2;
+  font-size: 18px;
+  font-family: Open Sans, Arial, sans-serif;
+}
+#filelist li{
+  list-style-type: none;
+}
+#filelist a{
+  color: #4A8BB6;
+  text-decoration: none;
+}
+#paper{
+  position: fixed;
+  top: 10px;
+}
+</style>
+<canvas id="paper"></canvas>
+<ul id="filelist">
+  <li><a href="#">Effects.gp3</a></li>
+  <li><a href="#">Effects.gp4</a></li>
+  <li><a href="#">Effects.gp5</a></li>
+  <li><a href="#">FadeToBlack.gp4</a></li>
+  <li><a href="#">Serenade.gp5</a></li>
+  <li><a href="#">Test01.gp3</a></li>
+  <li><a href="#">Test01.gp4</a></li>
+  <li><a href="#">Test01.gp5</a></li>
+  <li><a href="#">Test02.gp3</a></li>
+  <li><a href="#">Test02.gp4</a></li>
+  <li><a href="#">Test02.gp5</a></li>
+  <li><a href="#">Test03.gp3</a></li>
+  <li><a href="#">Test03.gp4</a></li>
+  <li><a href="#">Test03.gp5</a></li>
+  <li><a href="#">TestAccentuations.gp3</a></li>
+  <li><a href="#">TestAccentuations.gp4</a></li>
+  <li><a href="#">TestAccentuations.gp5</a></li>
+  <li><a href="#">TestBends.gp3</a></li>
+  <li><a href="#">TestBends.gp4</a></li>
+  <li><a href="#">TestBends.gp5</a></li>
+  <li><a href="#">TestDead.gp3</a></li>
+  <li><a href="#">TestDead.gp4</a></li>
+  <li><a href="#">TestDead.gp5</a></li>
+  <li><a href="#">TestFingering.gp4</a></li>
+  <li><a href="#">TestFingering.gp5</a></li>
+  <li><a href="#">TestGrace.gp3</a></li>
+  <li><a href="#">TestGrace.gp4</a></li>
+  <li><a href="#">TestGrace.gp5</a></li>
+  <li><a href="#">TestHammer.gp3</a></li>
+  <li><a href="#">TestHammer.gp4</a></li>
+  <li><a href="#">TestHammer.gp5</a></li>
+  <li><a href="#">TestHarmonics.gp3</a></li>
+  <li><a href="#">TestHarmonics.gp4</a></li>
+  <li><a href="#">TestHarmonics.gp5</a></li>
+  <li><a href="#">TestOtherEffects.gp3</a></li>
+  <li><a href="#">TestOtherEffects.gp4</a></li>
+  <li><a href="#">TestOtherEffects.gp5</a></li>
+  <li><a href="#">TestRanges.gp3</a></li>
+  <li><a href="#">TestRanges.gp4</a></li>
+  <li><a href="#">TestRanges.gp5</a></li>
+  <li><a href="#">TestSlides.gp3</a></li>
+  <li><a href="#">TestSlides.gp4</a></li>
+  <li><a href="#">TestSlides.gp5</a></li>
+  <li><a href="#">TestStrokes.gp3</a></li>
+  <li><a href="#">TestStrokes.gp4</a></li>
+  <li><a href="#">TestStrokes.gp5</a></li>
+  <li><a href="#">TestTremolo.gp4</a></li>
+  <li><a href="#">TestTremolo.gp5</a></li>
+  <li><a href="#">TestTrills.gp4</a></li>
+  <li><a href="#">TestTrills.gp5</a></li>
+  <li><a href="#">TestTuplets.gp3</a></li>
+  <li><a href="#">TestTuplets.gp4</a></li>
+  <li><a href="#">TestTuplets.gp5</a></li>
+  <li><a href="#">TestVibrato.gp3</a></li>
+  <li><a href="#">TestVibrato.gp4</a></li>
+  <li><a href="#">TestVibrato.gp5</a></li>
+</ul>
+
 <script>
 
 // method `facade` will load a module
 // and try to execute the `init` method of the module exports.
 _use("alphatab",function(alphatab){
-  alphatab.importer.ScoreLoader.loadScoreAsync("test/fixtures/Effects.gp5",function(score){
-    console.log(score);
-  });
+  function renderResource(name){
+    var canvas = document.getElementById('paper');
+    var settings = alphatab.Settings.fromJson({});
+    var renderer = new alphatab.rendering.ScoreRenderer(settings, canvas);
+
+    alphatab.importer.ScoreLoader.loadScoreAsync("test/fixtures/" + name,function(score){
+      renderer.renderMultiple(score.tracks)
+    });
+  }
+
+  var items = document.querySelectorAll("#filelist li a");
+  for(var i = 0;item = items[i];i++){
+    item.addEventListener("click",function(){
+      renderResource(this.innerHTML);
+    });
+  }
+  renderResource(items[0].innerHTML);
 });
 
 </script>
